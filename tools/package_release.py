@@ -9,6 +9,7 @@ import subprocess
 import sys
 import tempfile
 import zipfile
+from contextlib import closing
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -106,7 +107,7 @@ def main():
             if not (target / "preview.png").is_file() or not (target / "data/demo.sqlite3").is_file():
                 raise RuntimeError("演示检查未生成预期文件")
             import sqlite3
-            with sqlite3.connect(target / "data/demo.sqlite3") as db:
+            with closing(sqlite3.connect(target / "data/demo.sqlite3")) as db:
                 assert db.execute("SELECT COUNT(*) FROM rounds").fetchone()[0] == 2
     checksum = hashlib.sha256(ARCHIVE.read_bytes()).hexdigest()
     ARCHIVE.with_suffix(".zip.sha256").write_text(f"{checksum}  {ARCHIVE.name}\n", "utf-8")
