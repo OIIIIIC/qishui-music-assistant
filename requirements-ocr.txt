@@ -1,0 +1,2 @@
+# Optional: local image recognition, not needed for the built-in demo.
+rapidocr-onnxruntime==1.4.4

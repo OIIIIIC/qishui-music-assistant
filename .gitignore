@@ -1,0 +1,16 @@
+.venv/
+.local/
+__pycache__/
+.pytest_cache/
+build/
+dist/
+release/
+*.spec
+*.lnk
+.env
+.env.*
+*.log
+*.sqlite3*
+captures/
+.idea/
+.vscode/
